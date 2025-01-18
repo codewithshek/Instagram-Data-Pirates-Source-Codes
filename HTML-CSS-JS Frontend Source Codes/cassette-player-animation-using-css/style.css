@@ -1,0 +1,441 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto:500,700');
+$static: 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/851550/dotnoise-light-grey.png';
+
+$speed:3.5s;
+
+//colors
+$bg: #8fe2ec;
+$label_1: #e6584c;
+$label_2: #484848;
+$label_3: #f8f8f8;
+$tape_1: #4b4b56;
+$tape_2: #353535;
+$tape_3: #adadad;
+
+*,*:before,*:after{box-sizing:border-box}
+
+body{
+  display: grid;
+  place-items: center;
+  min-height: 100vh;
+  background:$bg;
+  background-image:url($static);
+  animation: static 2s steps(1) infinite;
+}
+
+.grain{
+  position:fixed;
+  width:100%;
+  height:100%;
+  background-image:url($static);
+  animation: static 2s steps(1) infinite;
+  opacity:0.4;
+  z-index:11;
+}
+
+@function p(){@return percentage(random(99))}
+
+@keyframes static {
+  @for $i from 0 to 99 {
+    #{$i}% {background-position: p() p()}
+  }
+}
+
+a{
+  position:fixed;
+  bottom:0;
+  text-align:center;
+  width:100%;
+  padding:10px;
+  font-family: 'Roboto', sans-serif;
+  color:rgba(black,0.3);
+  z-index:12;
+}
+
+.cassette{
+  width:554px;
+  height:350px;
+  background:$tape_1;
+  border-radius:10px;
+  border:4px solid $tape_2;
+  position:relative;
+  
+  @media (max-width: 600px) {
+    //not perfect in the smaller form, but good enough
+    width:300px;
+    height:190px;
+    font-size:0.55em;
+  }
+  
+  &:after{
+    display:block;
+    content:'';
+    width:104%;
+    height:30%;
+    margin-left:-2%;
+    background:$tape_1;
+    border-radius:10px;
+    bottom:7%;
+    position:absolute;
+    z-index:-1;
+    border:4px solid $tape_2;
+  }
+  
+  &:before{
+    display:block;
+    content:'';
+    width:89%;
+    height:4px;
+    margin:auto;
+    background:rgba(white,0.1);
+    border-radius:10px;
+    top:3%;
+    position:relative;
+  }
+  
+  .label{
+    width:90%;
+    height:64%;
+    position:relative;
+    margin:auto;
+    top:7%;
+    border-radius:8px;
+    box-shadow:inset 0 0 0 4px $tape_2;
+    background:linear-gradient(
+      $label_1 8%,    $label_3 8%,
+      $label_3 30%,   $label_2 30%,
+      $label_2 31.5%, $label_3 31.5%,
+      $label_3 36%,   $label_2 36%,
+      $label_2 37.5%, $label_3 37.5%,
+      $label_3 39%,   $label_2 39%,
+      $label_2 40.5%, $label_3 40.5%,
+      $label_3 42%,   $label_2 42%,
+      $label_2 43.5%, $label_3 43.5%,
+      $label_3 45%,   $label_2 45%,
+      $label_2 46.5%, $label_3 46.5%,
+      $label_3 48%,   $label_2 48%,
+      $label_2 49.5%, $label_3 49.5%,
+      $label_3 51%,   $label_2 51%,
+      $label_2 52.5%, $label_3 52.5%,
+      $label_3 54%,   $label_2 54%,
+      $label_2 55.5%, $label_3 55.5%,
+      $label_3 57%,   $label_2 57%,
+      $label_2 58.5%, $label_3 58.5%,
+      $label_3 60%,   $label_2 60%,
+      $label_2 61.5%, $label_3 61.5%,
+      $label_3 63%,   $label_2 63%,
+      $label_2 64.5%, $label_3 64.5%,
+      $label_3 66%,   $label_2 66%,
+      $label_2 67.5%, $label_3 67.5%,
+      $label_3 69%,   $label_2 69%,
+      $label_2 70.5%, $label_3 70.5%,
+      $label_3 72%,   $label_2 72%,
+      $label_2 73.5%, $label_3 73.5%,
+      $label_3 75%,   $label_2 75%,
+      $label_2 76.5%, $label_3 76.5%,
+      $label_3 78%,   $label_2 78%,
+      $label_2 79.5%, $label_3 79.5%,
+      $label_3 81%,   $label_2 81%,
+      $label_2 82.5%
+    );
+    
+    &:before{
+      position:absolute;
+      display:block;
+      top:12%;
+      left:3%;
+      content:'B';
+      padding:3px;
+      text-align:center;
+      width:1.3em;
+      height:1.3em;
+      color:$label_3;
+      font-weight:bold;
+      font-size:1.4em;
+      background:$tape_1;
+      border-radius:1px;
+    }
+    
+    &:after{
+      position:absolute;
+      display:block;
+      content:'N.R. [\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0] ☐\fe0e IN ☒\fe0e OUT';
+      font-weight:700;
+      font-family: 'Roboto', sans-serif;
+      font-size:0.9em;
+      top:22%;
+      right:3%;
+      color:$tape_1;
+    }
+    
+    .cutout{
+      width:70%;
+      height:46%;
+      position:relative;
+      margin:auto;
+      top:36%;
+      background:$tape_1;
+      border-radius:3px;
+      box-shadow:inset 0 0 0 4px $tape_2;
+      
+      &:before{
+        position:absolute;
+        display:block;
+        content:'Normal Bias 120µ\fe0es EQ';
+        color:rgba(white,0.8);
+        font-size:0.85em;
+        font-weight:500;
+        font-family: 'Roboto', sans-serif;
+        bottom:-25%;
+      }
+      
+      &:after{
+        position:absolute;
+        display:block;
+        content:'A 60';
+        color:rgba(white,0.8);
+        font-size:1.5em;
+        font-weight:bold;
+        top:100%;
+        right:0;
+        background:$label_1;
+        background-image:linear-gradient(90deg,$label_1 44%, rgba(white,0.8) 44%, rgba(white,0.8) 45%, $label_1 45%);
+        height:36%;
+        padding:1.2% 5%;
+        box-shadow:inset 0 0 0 8px $label_1;
+        font-family: 'Roboto', sans-serif;
+      }
+      
+      .reel_hole{
+        position:absolute;
+        background:$tape_3;
+        width:20%;
+        top:15%;
+        border:3px solid $tape_2;
+        box-shadow:0 0 0 3px $tape_1,0 0 0 5px $tape_2;
+        border-radius:50%;
+        right:5.5%;
+        
+        &:after {
+          content: '';
+          display: block;
+          padding-bottom: 100%;
+          box-shadow:inset 0 0 0 6px $tape_3;
+          background:$tape_2;
+          border-radius:50%;
+        }
+        
+        &:before{
+          position:absolute;
+          display:block;
+          content:'';
+          width:100%;
+          height:100%;
+          top:0;
+          left:0;
+          border-radius:50%;
+          background:$bg;
+          transform:scale(0.75);
+          z-index:10;
+        }
+        
+        &:first-of-type{
+          left:5.5%;
+        }
+        
+        .gear{
+          position:absolute;
+          width:14%;
+          height:86%;
+          background:$bg;
+          top:50%;
+          left:50%;
+          margin-left:-7%;
+          margin-top:-43%;
+          box-shadow:0 0 0 2px $tape_2;
+          animation: gears $speed linear infinite alternate;
+          
+          &:before, &:after{
+            display:block;
+            content:'';
+            position:absolute;
+            width:100%;
+            height:100%;
+            background:$bg;
+            top:0;
+            left:0;
+            box-shadow:0 0 0 2px $tape_2;
+            transform:rotate(240deg);
+          }
+          
+          &:after{
+            transform:rotate(120deg);
+            width:220%;
+            top:2%;
+            left:-75%;
+            background:none;
+            box-shadow:-2px -2px 0 0 $tape_2;
+            background-image:linear-gradient(90deg, $bg calc(50% - 1px),$tape_2 calc(50% - 1px),$tape_2 calc(50% + 1px), $label_1 calc(50% + 2px)),
+              linear-gradient($bg calc(100% - 2px), $tape_2 calc(100% - 2px));
+            background-size:100% 50%, 50% 100%;
+            background-repeat:no-repeat;
+          }
+        }
+        
+        @keyframes gears {
+          from{transform:rotate(0deg);}
+          to{transform:rotate(2160deg);}
+        }
+      }
+      
+      .window{
+        position:absolute;
+        background:$bg;
+        width:40%;
+        height:68%;
+        top:15%;
+        left:30%;
+        border:3px solid $tape_2;
+        overflow:hidden;
+        
+        &:after{
+          display:block;
+          position:absolute;
+          background:linear-gradient(transparent 13%, rgba(white,0.4) 13%, rgba(white,0.4) 24%, transparent 24%, transparent 34%, rgba(white,0.4) 34%, rgba(white,0.4) 50%, transparent 50%);
+          content:'';
+          width:100%;
+          height:100%;
+        }
+        
+        .spool{
+          position:absolute;
+          top:-22%;
+          width: 70%;
+          background:$tape_3;
+          border:3px solid $tape_2;
+          border-radius:50%;
+          box-shadow:0 0 0 10px lighten($label_2,10),0 0 0 13px $tape_2;
+          
+          &:after {
+            content: '';
+            display: block;
+            padding-bottom: 100%;
+          }
+          
+          &:first-of-type{
+            left:-64%;
+            animation: spooling $speed linear infinite alternate;
+          }
+          
+          &:last-of-type{
+            right:-64%;
+            animation: spooling $speed linear infinite alternate-reverse;
+          }
+        }
+        
+        @keyframes spooling {
+          from{box-shadow:0 0 0 0.5em lighten($label_2,10),0 0 0 calc(0.5em + 3px) $tape_2;}
+          to{box-shadow:0 0 0 5em lighten($label_2,10),0 0 0 calc(5em + 3px) $tape_2;}
+        }
+      }
+    }
+  }
+  
+  .head{
+    width:60%;
+    height:25.5%;
+    position:absolute;
+    margin-left:20%;
+    bottom:-4%;
+    
+    &:before, &:after{
+      display:block;
+      content:'';
+      width:70%;
+      height:100%;
+      position:absolute;
+      background:$tape_1;
+      border:4px solid $tape_2;
+      background-image:linear-gradient(rgba(white,0.1) 0%, rgba(white,0.1) 100%);
+      background-repeat:no-repeat;
+      background-position:15% 8%;
+      background-size: 100% 4px;
+    }
+    
+    &:before{
+      transform: skew(-15deg);
+      left:-8%;
+      border-right:none;
+      border-radius:10px 0 0  10px;
+      box-shadow:inset 6px 0 0 0 $tape_1;
+    }
+    
+    &:after{
+      transform: skew(15deg);
+      right:-8%;
+      border-left:none;
+      border-radius:0 10px 10px 0;
+      box-shadow:inset -6px 0 0 0 $tape_1;
+    }
+  }
+  
+  .screw{
+    position:absolute;
+    text-align:right;
+    top:7%;
+    left:4%;
+    
+    &:before{
+      content:'\20e0\fe0e';
+      font-size:1.1em;
+      color:$tape_2;
+      font-weight:bold;
+      position:absolute;
+      right: 0;
+      bottom: 0;
+    }
+    
+    &.i2{
+      right:1%;
+      &:before{transform:rotate(90deg)}
+    }
+    
+    &.i3{
+      bottom:1%;
+      &:before{transform:rotate(-30deg)}
+    }
+    
+    &.i4{
+      right:1%;
+      bottom:1%;
+      &:before{transform:rotate(-90deg)}
+    }
+    
+    &.i5{
+      left:calc(50% + 0.5em);
+      bottom:9%;
+      &:before{transform:rotate(45deg)}
+    }
+  }
+  
+  .hole{
+    width:5%;
+    background:$bg;
+    position:absolute;
+    border-radius:50%;
+    border:3px solid $tape_2;
+    bottom:0;left:50%;
+    margin-left:-2.5%;
+    
+    &:after {
+      content: '';
+      display: block;
+      padding-bottom: 100%;
+    }
+    
+    &.i1{bottom:0%;left:28%;}
+    &.i2{bottom:2%;left:38%;}
+    &.i3{bottom:0%;left:72%;}
+    &.i4{bottom:2%;left:62%;}
+  }
+}

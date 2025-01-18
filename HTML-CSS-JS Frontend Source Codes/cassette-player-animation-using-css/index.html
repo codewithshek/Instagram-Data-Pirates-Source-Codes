@@ -1,0 +1,17 @@
+.grain
+.cassette
+  .head
+  .label
+    .cutout
+      .reel_hole
+        .gear
+      .reel_hole
+        .gear
+      .window
+        .spool
+        .spool
+  .accents
+    - for i in (1..5)
+      .screw(class='i#{i}')
+    - for i in (1..4)
+      .hole(class='i#{i}')
